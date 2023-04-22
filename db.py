@@ -41,7 +41,10 @@ def query(querytest: str, params = tuple()) -> Tuple[bool, list[tuple] | str]:
     if not result[0]:
         return result
     else:
-        return (True, [structure(x) for x in result[1]])
+        data = [structure(x) for x in result[1]]
+        if len(data) < 1:
+            return (False, "No data returned")
+        return (True, data)
     
 
 #Turn tuples returned by MySQL into a dictionary
