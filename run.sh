@@ -1,0 +1,1 @@
+flask --app main run --debug & npx tailwind -i static/input.css -o static/tw.css --watch

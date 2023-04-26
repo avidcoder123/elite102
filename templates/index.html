@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="pt-3 items-center flex flex-col gap-7">
+        <h1 class="text-5xl text-center">Welcome to Bank 102!</h1>
+        <form class="flex flex-col gap-3" method="POST">
+            {% if error %}
+                <div class="w-96 h-10 rounded-lg bg-red-600 items-center justify-center flex">
+                    <span class="text-md text-white text-center">{{error}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-cyan-300 border-4" name="username" type="text" placeholder="Username" required />
+            <input class="w-96 h-10 rounded-lg border-green-300 border-4" name="password" type="password" placeholder="Password" required />
+            <button class="bg-blue-500 w-96 h-10 rounded-lg" type="submit" formaction="/login">Login</button>
+            <button class="bg-green-500 w-96 h-10 rounded-lg" type="submit" formaction="/register">Register</button>
+        </form>
+    </div>
+{% endblock %}

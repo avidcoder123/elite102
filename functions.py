@@ -47,7 +47,6 @@ def change_password(uid: int, oldpass: str, newpass: str) -> bool:
         return False
     q = db.execute("update users set password=%s where id=%s and password=%s", (newpass, uid, oldpass))
     db.connection.commit()
-    breakpoint()
 
     return q[0]
 
@@ -62,7 +61,7 @@ def balance(uid: int) -> float:
 #Desposit money
 def deposit(uid: int, amount: float) -> bool:
     bal = balance(uid)
-    q = db.execute("update users set balance=%s where id=%s", (bal + amount, uid))
+    q = db.execute("update users set balance=%s where id=%s", (float(bal) + amount, uid))
     db.connection.commit()
 
     return q[0]

@@ -4,7 +4,7 @@ from typing import Tuple, TypedDict
 credentials = {
     "user": "root",
     "database": "bank",
-    "password": "northkoreabestkorea"
+    "password": "dprk"
 }
 
 connection = mysql.connector.connect(**credentials)

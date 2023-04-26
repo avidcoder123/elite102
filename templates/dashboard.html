@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="pt-3 items-center flex flex-col gap-7">
+        <h1 class="text-5xl">Dashboard</h1>
+        <h2 class="text-3xl">Your Balance: ${{balance}}</h2>
+        <form class="flex flex-col gap-3 bg-slate-200 p-10 rounded-lg" method="POST">
+            <h1 class="text-xl mb-3">Adjust Balance</h1>
+            {% if moneyError %}
+                <div class="w-96 h-10 rounded-lg bg-red-600 items-center justify-center flex">
+                    <span class="text-md text-white text-center">{{moneyError}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-cyan-300 border-4" name="amount" type="number" step="0.01" placeholder="Amount" required />
+            <button class="bg-green-500 w-96 h-10 rounded-lg" type="submit" formaction="/deposit">Desposit</button>
+            <button class="bg-yellow-500 w-96 h-10 rounded-lg" type="submit" formaction="/withdraw">Withdraw</button>
+        </form>
+        <form class="flex flex-col gap-3 bg-slate-200 p-10 rounded-lg" method="POST" action="/wire">
+            <h1 class="text-xl mb-3">Wire Funds</h1>
+            {% if wireError %}
+                <div class="w-96 h-10 rounded-lg bg-red-600 items-center justify-center flex">
+                    <span class="text-md text-white text-center">{{wireError}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-cyan-300 border-4" name="amount" type="number" step="0.01" placeholder="Amount" required />
+            <input class="w-96 h-10 rounded-lg border-green-300 border-4" name="recipient" type="text" placeholder="Recipient Username" required />
+            <button class="bg-green-500 w-96 h-10 rounded-lg" type="submit">Wire</button>
+        </form>
+        <form class="flex flex-col gap-3 bg-slate-200 p-10 rounded-lg" method="POST" action="/changeusername">
+            <h1 class="text-xl mb-3">Change Username</h1>
+            {% if usernameError %}
+                <div class="w-96 h-10 rounded-lg bg-red-600 items-center justify-center flex">
+                    <span class="text-md text-white text-center">{{usernameError}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-cyan-300 border-4" name="newname" type="text" placeholder="New Username" required />
+            <button class="bg-cyan-500 w-96 h-10 rounded-lg" type="submit">Apply</button>
+        </form>
+        <form class="flex flex-col gap-3 bg-slate-200 p-10 rounded-lg" method="POST" action="/changepassword">
+            <h1 class="text-xl mb-3">Change Password</h1>
+            {% if passwordError %}
+                <div class="w-96 h-10 rounded-lg bg-red-600 items-center justify-center flex">
+                    <span class="text-md text-white text-center">{{passwordError}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-cyan-300 border-4" name="oldpass" type="password" placeholder="Old Password" required />
+            <input class="w-96 h-10 rounded-lg border-green-300 border-4" name="newpass" type="password" placeholder="New Password" required />
+            <button class="bg-cyan-500 w-96 h-10 rounded-lg" type="submit">Apply</button>
+        </form>
+
+        <form class="flex flex-col gap-3 bg-red-500 p-10 rounded-lg" method="POST" action="/delete">
+            <h1 class="text-xl mb-3">Delete Account</h1>
+            {% if deleteError %}
+                <div class="w-96 h-10 rounded-lg bg-yellow-500 items-center justify-center flex">
+                    <span class="text-md text-center">{{deleteError}}</span>
+                </div>
+            {% endif %}
+            <input class="w-96 h-10 rounded-lg border-red-300 border-4" name="password" type="password" placeholder="Password" required />
+            <button class="bg-yellow-500 w-96 h-10 rounded-lg" type="submit">Delete</button>
+        </form>
+
+        <button class="bg-red-600 text-white w-96 h-12 rounded-lg" type="submit" onclick="window.location = '/logout';">Logout</button>
+    </div>
+{% endblock %}
